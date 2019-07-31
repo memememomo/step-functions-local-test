@@ -1,10 +1,17 @@
+
+## 概要
+
+![構成図](https://github.com/memememomo/step-functions-local-test/blob/img/img/Step%20Functions%20Local+SAM%20Local.png?raw=true)
+
+Docker を使用して Step Functions Local を実行する環境です。
+
 ## 想定環境
 
-Docker for Macがインストールされていることを想定しています。
+Docker for Mac がインストールされていることを想定しています。
 
 ## 実行手順
 
-以下の手順でSAM LocalとStep Functions Localのコンテナを起動します。
+以下の手順で SAM Local と Step Functions Local のコンテナを起動します。
 
 ```bash
 # ビルド
@@ -17,7 +24,7 @@ $ COMPOSE_PROJECT_NAME=step-functions-local-test docker-compose run go-build ./g
 $ COMPOSE_PROJECT_NAME=step-functions-local-test docker-compose up
 ```
 
-別コンソールで、以下の手順でStep Functionsを実行します。
+別コンソールで、以下の手順で Step Functions を実行します。
 
 ```bash
 # StateMachineを作成
