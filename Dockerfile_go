@@ -1,0 +1,10 @@
+FROM golang:1.11.5-alpine
+
+RUN apk add --no-cache git bash make curl gcc libc-dev openssl && \
+    go get -u github.com/golang/dep/cmd/dep
+
+WORKDIR /go/src/step-functions-local-test
+COPY . /go/src/step-functions-local-test
+
+RUN dep ensure
+RUN cd ./handlers/helloworld/ && CGO_ENABLED=0 GOOS=linux go build -v -installsuffix cgo -o main .

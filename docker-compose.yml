@@ -1,0 +1,43 @@
+version: '3'
+services:
+  sam-local:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile_sam
+    command: ./start-lambda.sh
+    volumes:
+      - .:/var/opt/
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - VOLUME=$PWD
+    env_file:
+      - .env
+    networks:
+      - net
+
+  step-functions-local:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile_stepfunctions
+    ports:
+      - '8083:8083'
+    env_file:
+      - aws-stepfunctions-local-credentials.txt
+    depends_on:
+      - sam-local
+    networks:
+      - net
+
+  # Goビルド用
+  go-build:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile_go
+    command: ./go-build.sh
+    volumes:
+      - .:/go/src/step-functions-local-test/:cached
+
+
+networks:
+  net:
+    driver: bridge

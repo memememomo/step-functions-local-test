@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Runtime: go1.x
+    Timeout: 900
+
+Resources:
+  HelloWorld:
+    Properties:
+      CodeUri: ./handlers/helloworld
+      FunctionName: HelloWorld
+      Handler: main
+    Type: AWS::Serverless::Function
